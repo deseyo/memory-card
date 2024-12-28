@@ -1,42 +1,219 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.main-section {
+  display: grid;
+  grid-template-columns:  repeat(auto-fill, 300px);
+  gap: 50px;
+  justify-content: center;
+  margin: 75px 0 55px 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 375px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgb(129, 103, 202);
+  border: 2px solid rgb(117, 110, 197);
+  border-radius: 12px;
+  background-color: rgb(23, 23, 23);
+  transition: transform 0.2s ease-in-out;
 }
 
-@keyframes logo-spin {
+.card-container:hover {
+  transform: scale(1.02);
+}
+
+.card-img {
+  max-width: 275px;
+  height: auto;
+}
+
+.nav-section {
+  top: 0;
+  position: fixed;
+  z-index: 2;
+  width: 100vw;
+  height: 50px;
+  box-shadow: 0 0 10px rgb(63, 48, 108);
+  background-color: rgb(0, 0, 0);
+}
+
+.nav-items {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+  list-style-type: none;
+}
+
+.nav-item {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.score,
+.info-header {
+  color: rgb(157, 148, 255);
+}
+
+.right-answer-score {
+  animation: right-answer-score 0.5s ease-in;
+}
+
+.false-answer-score {
+  animation: false-answer-score 0.5s ease-in;
+}
+
+.answer-window {
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 120px;
+  opacity: 0;
+  border: 5px solid;
+  border-radius: 15px;
+  transform: translate(-50%, -50%);
+}
+
+.answer-window.right-answer-window {
+  border-color: rgb(0, 129, 0);
+  color: rgb(0, 129, 0);;
+  background-color: rgba(0, 128, 0, 0.358);
+  animation: answer-window 0.5s ease-in;
+}
+
+.answer-window.false-answer-window {
+  border-color: rgb(255, 0, 0);
+  color: rgb(255, 0, 0);
+  background-color: rgba(255, 0, 0, 0.183);
+  animation: answer-window 0.5s ease-in;
+}
+
+.answer-window-text {
+  font-size: 60px;
+  font-weight: 500;
+}
+
+body:has(.show-window) {
+  overflow: hidden;
+}
+
+.info-window-container {
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.483);
+  transform: translate(-50%, -50%);
+}
+
+.info-window-container.show-window {
+  display: flex;
+}
+
+.info-window {
+  width: 450px;
+  height: 200px;
+  padding: 30px;
+  opacity: 0;
+  border-radius: 10px;
+  background-color: rgb(18, 18, 18);
+  animation: show-window 0.3s ease-in forwards;
+}
+
+.info-header {
+  margin-bottom: 5px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.info-text {
+  margin-bottom: 15px;
+  font-size: 17.5px;
+}
+
+.close-btn {
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16.5px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(106, 100, 180);
+  transition: 0.2s ease-in-out;
+  transition-property: background-color, box-shadow;
+}
+
+.close-btn:hover {
+  box-shadow: 0 0 ;
+  background-color: rgb(85, 79, 146);
+}
+
+.footer-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 50px;
+  box-shadow: 0 0 10px rgb(63, 48, 108);
+  background-color: rgb(0, 0, 0);
+}
+
+.footer-item {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.github-icon {
+  width: 22px;
+  height: auto;
+}
+
+@keyframes show-window {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes answer-window {
   from {
-    transform: rotate(0deg);
+    opacity: 1;
+    transform: translate(-50%, -50%);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 0;
+    transform: translate(-53%, -53%);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@keyframes right-answer-score {
+  from {
+    color: green;
+  }
+  to {
+    color: rgb(157, 148, 255);
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+@keyframes false-answer-score {
+  from {
+    color: red;
+  }
+  to {
+    color: rgb(157, 148, 255);
+  }
 }
